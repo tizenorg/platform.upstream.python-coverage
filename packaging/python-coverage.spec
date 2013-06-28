@@ -6,6 +6,7 @@ Url:            http://nedbatchelder.com/code/coverage
 License:        BSD-3-Clause
 Group:          Platform Development/Python
 Source:         coverage-%{version}.tar.gz
+Source1001: 	python-coverage.manifest
 BuildRequires:  python-devel
 BuildRequires:  python-distribute
 BuildRequires:  python-xml
@@ -18,6 +19,7 @@ library to determine which lines are executable, and which have been executed.
 
 %prep
 %setup -q -n coverage-%{version}
+cp %{SOURCE1001} .
 
 %build
 python setup.py build
@@ -26,5 +28,6 @@ python setup.py build
 python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 
 %files
+%manifest %{name}.manifest
 %{_bindir}/coverage*
 %{py_sitedir}/*
